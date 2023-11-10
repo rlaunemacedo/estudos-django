@@ -1,2 +1,2 @@
 # hands
-Estudos usando MongoDB
+Estudos sobre o Django
