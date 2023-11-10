@@ -65,7 +65,7 @@ polls/
 ```
 ## Escrevendo a Primeira View
 Arquivo: **`polls/views.py`**
-```shell
+```python
 from django.http import HttpResponse
 
 def index(request):
@@ -77,8 +77,9 @@ Para tanto criaremos o arquivo de rotas `urls.py` no diretório `polls`.
 
 Arquivo: **`polls/urls.py`**
 ```python
-from django.http import HttpResponse
+from django.urls import path
+from . import views
 
-def index(request):
-    return HttpResponse("Hello, world. You're at the polls index.")
-```
+urlpatterns = [
+    path("", views.index, name="index"),
+]```
