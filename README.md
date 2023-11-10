@@ -64,9 +64,19 @@ polls/
     views.py
 ```
 ## Escrevendo a Primeira View
+Arquivo: **`polls/views.py`**
 ```shell
-polls/views.py¶
+from django.http import HttpResponse
 
+def index(request):
+    return HttpResponse("Hello, world. You're at the polls index.")
+```
+## Mapeando Uma Nova View
+Para ser reconhecida, toda `View` precisa ser mapeada na aplicação. 
+Para tanto criaremos o arquivo de rotas `urls.py` no diretório `polls`.
+
+Arquivo: **`polls/urls.py`**
+```python
 from django.http import HttpResponse
 
 def index(request):
