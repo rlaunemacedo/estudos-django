@@ -20,6 +20,18 @@ Diretório: **`est_django`**
 ```shell
 $ django-admin startproject mysite
 ```
+O `startproject` criará a estrutura similar a:
+```shell
+mysite/
+    manage.py
+    mysite/
+        __init__.py
+        settings.py
+        urls.py
+        asgi.py
+        wsgi.py
+```
+
 ## Servidor Web para Desenvolvimento
 Neste ponto já podemos rodar um servidor web de desenvolvimento. Para tanto vamos digitar o segunte comando:
 ```shell
@@ -34,7 +46,20 @@ Quit the server with CONTROL-C.
 Abra um browser e digite `http://127.0.0.0:8000` para ver o resultado: Um fogrete pronto para ser lançado!
 ## Criando a Aplicação Polls (Enquete)
 O exemplo que construiremos consiste de uma aplicação para enquetes. Para criar a aplicação, usaremos o comando do código abaixo.
+
 Diretório: **`mysite`**
 ```shell
 $ python manage.py startapp polls
+```
+O `startapp` criará uma estrutura parecida com esta:
+```shell
+polls/
+    __init__.py
+    admin.py
+    apps.py
+    migrations/
+        __init__.py
+    models.py
+    tests.py
+    views.py
 ```
