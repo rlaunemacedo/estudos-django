@@ -224,23 +224,19 @@ CREATE INDEX "polls_choice_question_id_c5b4b260" ON "polls_choice" ("question_id
 
 COMMIT;
 ```
-### Problemas ao Alterar um Modelo
-Solução:
-1. Delete all the migrations in your app and in django_migrations all the fields with django_migrations.app = your-app-name. How to do this depends on which DB you are using Example for MySQL: `delete from django_migrations where app = "your-app-name"`;
+## Criando as Tabelas no Banco
+Se estiver interessado, você também pode executar `python manager.py check`; isso verificará se há problemas em seu projeto sem fazer qualquer migrações ou alteração no banco de dados.
 
-2. Create an initial migration with the same schema as the existing table, with these steps:
-
-3. Modify your models.py to match with the current table in your database (Here, use the command `python manage.py inspectdb`. This command is like reverse migration. It generates the corresponding models.py for the current database tables schema.)
-
-4. Delete all files in "migrations"
-
-5. Run `python manage.py makemigrations polls`
-
-6. If you already have an existing database then run `python manage.py migrate --fake-initial` and then follow the step below.
-
-7. Modify your models.py to match the new schema (e.i. the schema that you need now)
-
-8. Make new migration by running `python manage.py makemigrations polls`
-
-9. Run `python manage.py migrate polls`
-
+Agora, execute a migração novamente para criar essas tabelas modelo em seu banco de dados:
+```shell
+$ python manage.py migrate
+```
+Teremos como resposta algo como:
+```shell
+Saída:
+Operations to perform:
+  Apply all migrations: admin, auth, contenttypes, polls, sessions
+Running migrations:
+  Rendering model states... DONE
+  Applying polls.0001_initial... OK
+```
