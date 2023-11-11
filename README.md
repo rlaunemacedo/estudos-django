@@ -97,13 +97,13 @@ urlpatterns = [
     path("admin/", admin.site.urls),
 ]
 ```
-Agora que incluímos uma `view` ao índice do URLconf. Vamos ver se está funcionando com o seguinte comando:
+Agora que incluímos uma `view` ao índice do URLconf, vamos ver se está funcionando com o seguinte comando:
 
 ```shell
 $ python manage.py runserver
 ```
 Vamos para http://localhost:8000/polls/ no navegador e deveremos ver o texto “Olá, mundo. Você está no índice de enquetes.”, que você definiu na visualização do índice.
-```
+
 ## Configurando A Base de Dados
 Agora vamos abrir o arquivo `mysite/settings.py`. Trata-se de um módulo Python que representa as diversas configurações do Django, inclusive a de bando de dados. Usaremos como exemplo o banco de dados default **SQLite**.
 
