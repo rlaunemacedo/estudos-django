@@ -96,6 +96,7 @@ urlpatterns = [
     path("polls/", include("polls.urls")),
     path("admin/", admin.site.urls),
 ]
+```
 Agora que incluímos uma `view` ao índice do URLconf. Vamos ver se está funcionando com o seguinte comando:
 
 ```shell
