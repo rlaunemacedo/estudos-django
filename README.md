@@ -174,7 +174,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-]```
+]
+```
 Agora que Django está pronto para incluir o app Polls, vamos rodar o seguinte comando:
 ```shell
 $ python manage.py makemigrations polls
