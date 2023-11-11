@@ -123,9 +123,48 @@ Alteraremos as chaves `LANGUAGE_CODE` e `TIME_ZONE` para **'pt-br'** e **'Americ
 
 Arquivo: **`mysite/settings.py`**
 ```python
+# Internationalization
+# https://docs.djangoproject.com/en/4.2/topics/i18n/
+
 LANGUAGE_CODE = 'pt-br'
 
 TIME_ZONE = 'America/Fortaleza'
 ...
 ```
+Após fazer estas alterações no arquivo `mysite/settings.py`, salve-o e rode este comando:
+
+```shell
+$ python manage.py migrate
+```
+O comando `migrate` analisa o arquivo de configuração `mysite/settings.py` até a chave `INSTALLED_APPS` e cria as tabelas necessárias no banco de dados escolhido.
+
+## Definindo a Modelagem dos Dados
+Agora nós vamos definir os modelos para a nossa enquete. Essencialmente o layoute do banco de dados e os metadados.
+
+O nosso enquete possuirá dois modelos: `Question` e `Choice`. Uma `Pergunta` tem uma pergunta e uma data de publicação. Uma `Escolha` possui dois campos: o texto da escolha e uma contagem de votos. Cada `Escolha` está associada a uma `Pergunta`.
+
+Esses conceitos são representados por classes Python. Edite o arquivo `polls/models.py` para que fique assim:
+
+[`polls/models.py`](https://docs.djangoproject.com/en/4.2/intro/tutorial02/#id2)
+
+```python
+from django.db import models
+
+
+class Question(models.Model):
+    question_text = models.CharField(max_length=200)
+    pub_date = models.DateTimeField("date published")
+
+
+class Choice(models.Model):
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    choice_text = models.CharField(max_length=200)
+    votes = models.IntegerField(default=0)
+```
+
+
+
+### 
+
+
 
