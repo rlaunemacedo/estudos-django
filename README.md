@@ -224,4 +224,23 @@ CREATE INDEX "polls_choice_question_id_c5b4b260" ON "polls_choice" ("question_id
 
 COMMIT;
 ```
+## Problemas ao Alterar um Modelo
+Solução:
+1. Delete all the migrations in your app and in django_migrations all the fields with django_migrations.app = your-app-name How to do this depends on which DB you are using Example for MySQL: delete from django_migrations where app = "your-app-name";
+
+2. Create an initial migration with the same schema as the existing table, with these steps:
+
+3. Modify your models.py to match with the current table in your database (Here, use the command "python manage.py inspectdb". This command is like reverse migration. It generates the corresponding models.py for the current database tables schema.)
+
+4. Delete all files in "migrations"
+
+5. Run python manage.py makemigrations your-app-name
+
+6. If you already have an existing database then run python manage.py migrate --fake-initial and then follow the step below.
+
+7. Modify your models.py to match the new schema (e.i. the schema that you need now)
+
+8. Make new migration by running python manage.py makemigrations your-app-name
+
+9. Run python manage.py migrate your-app-name
 
