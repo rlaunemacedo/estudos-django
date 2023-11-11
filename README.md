@@ -1,20 +1,24 @@
-# Django
+# Meu Tutorial Django
 Neste estudo, criaremos um diretório `est_django`, nele criaremos um ambiente virtuaal chamado `.django` e neste ambiente instalaremos o Django.
 
-## Criando/Ativando um Ambiente Virtual
+## Instalação do Ambiente Django
+
+### Criando/Ativando um Ambiente Virtual
 ```shell
 $ mkdir est_django
 $ cd est_django
 $ pytho3 -m venv .django
 $ source .django/bin/activate
 ```
-## Instalando o Django
+### Instalando o Django
 Diretório: **`est_django`**
 ```shell
 $ pip install django
 $ python -m django --version
 ```
-## Criando um Projeto para Conter a Aplicação
+## Primeiro Projeto
+
+### Criando um projeto para conter a aplicação
 Nomearemos o projeto como mysite.
 Diretório: **`est_django`**
 ```shell
@@ -31,8 +35,7 @@ mysite/
         asgi.py
         wsgi.py
 ```
-
-## Servidor Web para Desenvolvimento
+### Servidor web para desenvolvimento
 Neste ponto já podemos rodar um servidor web de desenvolvimento. Para tanto vamos digitar o segunte comando:
 ```shell
 $ python manage.py runserver
@@ -44,8 +47,13 @@ Starting development server at http://127.0.0.1:8000/
 Quit the server with CONTROL-C.
 ```
 Abra um browser e digite `http://127.0.0.0:8000` para ver o resultado: Um fogrete pronto para ser lançado!
-## Criando a Aplicação Polls (Enquete)
-O exemplo que construiremos consiste de uma aplicação para enquetes. Para criar a aplicação, usaremos o comando do código abaixo.
+
+## Aplicação para Enquetes - Polls
+O exemplo que construiremos consiste de uma aplicação para enquetes. 
+
+### Ciando uma aplicação
+
+Para criar a aplicação, usaremos o comando do código abaixo.
 
 Diretório: **`mysite`**
 ```shell
@@ -63,7 +71,7 @@ polls/
     tests.py
     views.py
 ```
-## Escrevendo a Primeira View
+### Escrevendo a Primeira View
 Arquivo: **`polls/views.py`**
 ```python
 from django.http import HttpResponse
@@ -71,7 +79,7 @@ from django.http import HttpResponse
 def index(request):
     return HttpResponse("Olá, mundo. Você está no index de enquetes.")
 ```
-## Mapeando Uma Nova View
+### Mapeando Uma Nova View
 Para ser reconhecida, toda `View` precisa ser mapeada na aplicação. 
 Para tanto criaremos o arquivo de rotas `urls.py` no diretório `polls`.
 
@@ -84,10 +92,10 @@ urlpatterns = [
     path("", views.index, name="index"),
 ]
 ```
-## Atualizando o Arquivo de Rotas da Root
+### Atualizando o Arquivo de Rotas da Root
 O próximo passo será apontar no arquivo de rotas, também chamado de `urls.py`, na `root` com a função `include()` que faz parte do módulo `django.urls`.
 
-Arquivo: **`polls/urls.py`**
+Arquivo: **`mysite/urls.py`**
 ```python
 from django.contrib import admin
 from django.urls import include, path
@@ -161,7 +169,7 @@ class Choice(models.Model):
 ```
 Aqui cada modelo é representado por uma classe que por sua vez é uma subclasse de `django.db.models.Model`. Uma vez informado, o Django criará as tabelas e seus campos definidos dentra das classes.
 
-## Ativando os Modelos
+### Ativando os Modelos
 Para que o Django crie as tabelas e API's necessŕias para acessar os dados, precisamos informar no arquivo `mysite/settings.py`, chave `INSTALLED_APPS`, a classe `polls.apps.PollsConfig` da seguinte forma:
 
 Arquivo: **`mysite/settings.py`**
@@ -224,7 +232,7 @@ CREATE INDEX "polls_choice_question_id_c5b4b260" ON "polls_choice" ("question_id
 
 COMMIT;
 ```
-## Criando as Tabelas no Banco
+### Criando as Tabelas no Banco
 Se estiver interessado, você também pode executar `python manager.py check`; isso verificará se há problemas em seu projeto sem fazer qualquer migrações ou alteração no banco de dados.
 
 Agora, execute a migração novamente para criar essas tabelas modelo em seu banco de dados:
