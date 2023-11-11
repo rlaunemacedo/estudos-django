@@ -82,4 +82,18 @@ from . import views
 
 urlpatterns = [
     path("", views.index, name="index"),
-]```
+]
+```
+## Atualizando o Arquivo de Rotas da Root
+O próximo passo será apontar no arquivo de rotas, também chamado de `urls.py`, na `root` com a função `include()` que faz parte do módulo `django.urls`.
+
+Arquivo: **`polls/urls.py`**
+```python
+from django.contrib import admin
+from django.urls import include, path
+
+urlpatterns = [
+    path("polls/", include("polls.urls")),
+    path("admin/", admin.site.urls),
+]
+```
