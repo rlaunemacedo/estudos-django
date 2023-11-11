@@ -249,3 +249,9 @@ Running migrations:
   Rendering model states... DONE
   Applying polls.0001_initial... OK
 ```
+### Atualizações nos modelos
+Após fazermos alterações na modelagem (arquivo: **`polls/models.py`**), basicamente rodaremos três dos últimos comandos vistos anteriormente, nomeadamente:
+1. **`python manage.py makemigrations polls`**
+2. **`python manage.py sqlmigrate polls ####*`**
+3. **`python manage.py migrate`**
+(*) #### deve ser trocado pelo número exibido no primeiro comando
