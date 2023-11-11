@@ -69,7 +69,7 @@ Arquivo: **`polls/views.py`**
 from django.http import HttpResponse
 
 def index(request):
-    return HttpResponse("Hello, world. You're at the polls index.")
+    return HttpResponse("Olá, mundo. Você está no index de enquetes.")
 ```
 ## Mapeando Uma Nova View
 Para ser reconhecida, toda `View` precisa ser mapeada na aplicação. 
@@ -96,4 +96,35 @@ urlpatterns = [
     path("polls/", include("polls.urls")),
     path("admin/", admin.site.urls),
 ]
+Agora que incluímos uma `view` ao índice do URLconf. Vamos ver se está funcionando com o seguinte comando:
+
+```shell
+$ python manage.py runserver
 ```
+Vamos para http://localhost:8000/polls/ no navegador e deveremos ver o texto “Olá, mundo. Você está no índice de enquetes.”, que você definiu na visualização do índice.
+```
+## Configurando A Base de Dados
+Agora vamos abrir o arquivo `mysite/settings.py`. Trata-se de um módulo Python que representa as diversas configurações do Django, inclusive a de bando de dados. Usaremos como exemplo o banco de dados default **SQLite**.
+
+Manteremos a chave `DATABASE` como está:
+
+Arquivo: **`mysite/settings.py`**
+```python
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+...
+```
+Alteraremos as chaves `LANGUAGE_CODE` e `TIME_ZONE` para **'pt-br'** e **'America/Fortaleza'**, respectivamente. E teremos
+
+Arquivo: **`mysite/settings.py`**
+```python
+LANGUAGE_CODE = 'pt-br'
+
+TIME_ZONE = 'America/Fortaleza'
+...
+```
+
