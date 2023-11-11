@@ -112,8 +112,8 @@ $ python manage.py runserver
 ```
 Vamos para http://localhost:8000/polls/ no navegador e deveremos ver o texto “Olá, mundo. Você está no índice de enquetes.”, que você definiu na visualização do índice.
 
-## Configurando A Base de Dados
-Agora vamos abrir o arquivo `mysite/settings.py`. Trata-se de um módulo Python que representa as diversas configurações do Django, inclusive a de bando de dados. Usaremos como exemplo o banco de dados default **SQLite**.
+## A Base de Dados
+É no aquivo `mysite/settings.py` que vamos, entre outras coisas, definir que banco de dados usaremos. Este arquivo é na verdade um módulo Python que representa as diversas configurações do Django. Usaremos como exemplo o banco de dados default **SQLite**.
 
 Manteremos a chave `DATABASE` como está:
 
@@ -127,7 +127,7 @@ DATABASES = {
 }
 ...
 ```
-Alteraremos as chaves `LANGUAGE_CODE` e `TIME_ZONE` para **'pt-br'** e **'America/Fortaleza'**, respectivamente. E teremos
+Aproveitaremos para alteraremos as chaves `LANGUAGE_CODE` e `TIME_ZONE` para **'pt-br'** e **'America/Fortaleza'**, respectivamente. E teremos
 
 Arquivo: **`mysite/settings.py`**
 ```python
@@ -144,17 +144,18 @@ Após fazer estas alterações no arquivo `mysite/settings.py`, salve-o e rode e
 ```shell
 $ python manage.py migrate
 ```
-O comando `migrate` analisa o arquivo de configuração `mysite/settings.py` até a chave `INSTALLED_APPS` e cria as tabelas necessárias no banco de dados escolhido.
+Usaremos mais vezes este comando sempre fizermos alguma alteração importante no projeto.
+O comando `migrate` analisa o arquivo de configuração `mysite/settings.py` para criar um conjunto de tabelas **necessárias** no banco de dados escolhido.
 
-## Definindo a Modelagem dos Dados
+## Definindo a Modelagem dos Dados do App
 Agora nós vamos definir os modelos para a nossa enquete. Essencialmente o layoute do banco de dados e os metadados.
 
-O nosso enquete possuirá dois modelos: `Question` e `Choice`. Uma `Pergunta` tem uma pergunta e uma data de publicação. Uma `Escolha` possui dois campos: o texto da escolha e uma contagem de votos. Cada `Escolha` está associada a uma `Pergunta`.
+O nosso enquete possuirá dois modelos: `Questoes` e `Respostas`. Estes modelos são definidos como `classes` do Python e a partir destas são criadas as `tabelas` no banco. A primeira classe possui dois campos: a questão; e a data de publicação. Cada resposta possui seu texto, uma contagem e a referência a uma pergunta.
 
-Esses conceitos são representados por classes Python. Edite o arquivo `polls/models.py` para que fique assim:
+### Definição dos modelos
+Vamos editar o arquivo `polls/models.py` para que fique assim:
 
-[`polls/models.py`](https://docs.djangoproject.com/en/4.2/intro/tutorial02/#id2)
-
+Arquivo: **`polls/models.py`**
 ```python
 from django.db import models
 
@@ -169,7 +170,7 @@ class Choice(models.Model):
 ```
 Aqui cada modelo é representado por uma classe que por sua vez é uma subclasse de `django.db.models.Model`. Uma vez informado, o Django criará as tabelas e seus campos definidos dentra das classes.
 
-### Ativando os Modelos
+### Ativando os modelos
 Para que o Django crie as tabelas e API's necessŕias para acessar os dados, precisamos informar no arquivo `mysite/settings.py`, chave `INSTALLED_APPS`, a classe `polls.apps.PollsConfig` da seguinte forma:
 
 Arquivo: **`mysite/settings.py`**
