@@ -150,21 +150,36 @@ Esses conceitos são representados por classes Python. Edite o arquivo `polls/mo
 ```python
 from django.db import models
 
-
 class Question(models.Model):
     question_text = models.CharField(max_length=200)
     pub_date = models.DateTimeField("date published")
-
 
 class Choice(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     choice_text = models.CharField(max_length=200)
     votes = models.IntegerField(default=0)
 ```
+Aqui cada modelo é representado por uma classe que por sua vez é uma subclasse de `django.db.models.Model`. Uma vez informado, o Django criará as tabelas e seus campos definidos dentra das classes.
 
+## Ativando os Modelos
+Para que o Django crie as tabelas e API's necessŕias para acessar os dados, precisamos informar no arquivo `mysite/settings.py`, chave `INSTALLED_APPS`, a classe `polls.apps.PollsConfig` da seguinte forma:
 
+Arquivo: **`mysite/settings.py`**
+```python
+INSTALLED_APPS = [
+    "polls.apps.PollsConfig",
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+]```
+Agora que Django está pronto para incluir o app Polls, vamos rodar o seguinte comando:
+```shell
+$ python manage.py makemigrations polls
+```
 
-### 
 
 
 
