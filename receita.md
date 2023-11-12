@@ -265,6 +265,30 @@ Criar o diretório `catalog/templates` e dentro dele o arquivo `base_generic.htm
 ```shell
 $ mkdir templates
 ```
+### Configurando a chave TEMPLATES em `settings.py`
+**Arquivo:** `settings.py`
+```python
+## Não esquecer de importar os
+import os
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates'),
+        ],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+```
 ### O arquivo html base
 Chamaremos de `base_generic.html` o script htlm carregado por todas as páginas.
 
@@ -394,30 +418,6 @@ from catalog import views
 
 urlpatterns = [
     path('', views.index, name='index'),
-]
-```
-### Configurando a chave TEMPLATES em `settings.py`
-**Arquivo:** `settings.py`
-```python
-## Não esquecer de importar os
-import os
-
-TEMPLATES = [
-    {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-            os.path.join(BASE_DIR, 'templates'),
-        ],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-            ],
-        },
-    },
 ]
 ```
 ### Vamos ver como está?
