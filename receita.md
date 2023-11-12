@@ -241,7 +241,13 @@ $ python3 manage.py runserver
 ### Fazer login
 Para fazer login no site, abra o `URL` `/admin` (e.i. http://127.0.0.1:8000/admin)
 
-
+## Criando a Home Page do Website
+### O mapa de urls
+    catalog/ — A página inicial (index).
+    catalog/books/ — Uma lista de todos os livros.
+    catalog/authors/ — Uma lista de todos os autores.
+    catalog/book/<id> — A exibição de detalhes de um livro específico, com uma chave primária de campo <id> (o padrão). Por exemplo, o URL do terceiro livro adicionado à lista será /catalog/book/3.
+    catalog/author/<id> — A exibição de detalhes para o autor específico com um campo de chave primária de <id>. Por exemplo, o URL do 11º autor adicionado à lista será /catalog/author/11.
 
 
 
