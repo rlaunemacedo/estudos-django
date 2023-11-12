@@ -363,6 +363,33 @@ $ touch style.css
     list-style: none;
   }
 ```
+### O arquivo index.html
+**Diretório:** `catalog/templates/`
+```shell
+$ touch index.html
+```
+**Arquivo:** `catalog/templates/index.html`
+```html
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Local Library Home</h1>
+  <p>
+    Welcome to LocalLibrary, a website developed by
+    <em>Mozilla Developer Network</em>!
+  </p>
+  <h2>Dynamic content</h2>
+  <p>The library has the following record counts:</p>
+  <ul>
+    <li><strong>Books:</strong> {{ num_books }}</li>
+    <li><strong>Copies:</strong> {{ num_instances }}</li>
+    <li><strong>Copies available:</strong> {{ num_instances_available }}</li>
+    <li><strong>Authors:</strong> {{ num_authors }}</li>
+  </ul>
+{% endblock %}
+```
+
+
 
 
 
