@@ -493,17 +493,6 @@ Abra o template base (/locallibrary/catalog/templates/base_generic.html) e insir
 <li><a href="{% url 'books' %}">Todos os livros</a></li>
 <li><a href="">Todos os autores</a></l
 ```
-
-
-
-
-
-
-
-
-
-
-
 ### URL mapping
 Adicionando o item `path('books/', views.BookListView.as_view(), name='books'),` à lista `urlpatterns`, teremos:
 
