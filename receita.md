@@ -1,7 +1,9 @@
 # MINHA RECEITA DJANGO
+**R N Launé Macêdo**
+
 **Timon-MA, 11../11/2023**
 
-Para a construção desta ingênua **receita**, usei como base a excelente fonte [**mdn web docs**](https://developer.mozilla.org/pt-BR/docs/Learn/Server-side/Django). Espero sinceramente que este trabalho seja útil aos iniciantes, como eu, ao estudo do framework **Django**.
+Para a construção desta ingênua **receita**, usei como base a excelente fonte [**mdn web docs**](https://developer.mozilla.org/pt-BR/docs/Learn/Server-side/Django). Fique claro, portanto que, por se tratar de uma receita, omitimos as valiosas observações e detalhamentos encontrados na supracitada fonte. Espero sinceramente que este trabalho seja útil aos iniciantes, como eu, ao estudo do framework **Django**.
 
 Meu ambiente de trabalho é o Linux Mint 21.2, Cinnamon (5.8.4) e Django 4.2
 ## Criando/Ativando Ambiente Virtual
