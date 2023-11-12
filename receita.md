@@ -242,7 +242,7 @@ $ python3 manage.py runserver
 ### Fazer login
 Para fazer login no site, abra o `URL` `/admin` (e.i. http://127.0.0.1:8000/admin)
 
-## Criando a Home Page do Website
+## Mapeando URLs
 ### O mapa de urls
     catalog/ — A página inicial (index).
     catalog/books/ — Uma lista de todos os livros.
@@ -259,6 +259,75 @@ urlpatterns = [
     path('', views.index, name='index'),
 ]
 ```
+### View baseada em função
+Arquivo: `catalog/views.py`
+```python
+from django.shortcuts import render
+from catalog.models import Book, Author, BookInstance, Genre
+
+# Create your views here.
+def index(request):
+    """View function for home page of site."""
+
+    # Generate counts of some of the main objects
+    num_books = Book.objects.all().count()
+    num_instances = BookInstance.objects.all().count()
+
+    # Available books (status = 'a')
+    num_instances_available = BookInstance.objects.filter(status__exact='a').count()
+
+    # The 'all()' is implied by default.
+    num_authors = Author.objects.count()
+
+    context = {
+        'num_books': num_books,
+        'num_instances': num_instances,
+        'num_instances_available': num_instances_available,
+        'num_authors': num_authors,
+    }
+
+    # Render the HTML template index.html with the data in the context variable
+    return render(request, 'index.html', context=context)
+```
+### Templates
+Criar o diretório `catalog/templates` e dentro dele o arquivo `base_generic.html`. e cole as linhas:
+Arquivo: `catalog/templates/base_generic.html`
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    {% block title %}<title>Local Library</title>{% endblock %}
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+      crossorigin="anonymous" />
+    <!-- Add additional CSS in static file -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-2">
+          {% block sidebar %}
+            <ul class="sidebar-nav">
+              <li><a href="{% url 'index' %}">Home</a></li>
+              <li><a href="">All books</a></li>
+              <li><a href="">All authors</a></li>
+            </ul>
+          {% endblock %}
+        </div>
+        <div class="col-sm-10">{% block content %}{% endblock %}</div>
+      </div>
+    </div>
+  </body>
+</html>
+```
+
+
 
 
 
