@@ -265,7 +265,7 @@ Criar o diretório `catalog/templates` e dentro dele o arquivo `base_generic.htm
 ```shell
 $ mkdir templates
 ```
-### Configurando a chave TEMPLATES em `settings.py`
+#### Configurando a chave TEMPLATES em `settings.py`
 **Arquivo:** `settings.py`
 ```python
 ## Não esquecer de importar os
