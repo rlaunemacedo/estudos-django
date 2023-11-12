@@ -415,10 +415,10 @@ TEMPLATES = [
 ### Vamos ver como está?
 ```shell
 $ python3 manage.py runserver
-``
+```
 E abra http://127.0.0.1:8000/ no seu navegador.
 
-Nota: Os links All books e All authors ainda não funcionarão porque os caminhos, visualizações e modelos para essas páginas não estão definidos. Acabamos de inserir espaços reservados para esses links no template base_generic.html.
+> Nota: Os links All books e All authors ainda não funcionarão porque os caminhos, visualizações e modelos para essas páginas não estão definidos. Acabamos de inserir espaços reservados para esses links no template base_generic.html.
 
 
 
