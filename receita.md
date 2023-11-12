@@ -13,8 +13,8 @@ $ django-admin --version
 ```
 ## Criando um Projeto
 ```shell
-$ django-admin startproject meuprj
-$ cd meuprj
+$ django-admin startproject meusite
+$ cd meusite
 ```
 ## Criando um Aplicativo
 ```shell
@@ -23,7 +23,7 @@ $ cd catalog
 ```
 ## Configurações
 ### Registrando o app
-Arquivo: `meuprj/settings.py`
+Arquivo: `meusite/settings.py`
 ```python
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -36,7 +36,7 @@ INSTALLED_APPS = [
 ]
 ```
 ### Especificando o banco de dados
-Arquivo: `meuprj/settings.py`
+Arquivo: `meusite/settings.py`
 ```python
 DATABASES = {
     'default': {
@@ -46,15 +46,14 @@ DATABASES = {
 }
 ```
 ### Outras configurações
-Arquivo: `meuprj/settings.py`
+Arquivo: `meusite/settings.py`
 ```python
 LANGUAGE_CODE = 'pt-br'
-
 TIME_ZONE = 'America/Fortaleza'
 ```
 ## Definindo as Rotas
 ### Conectando os mapeadores de URL
-Arquivo: `meuprj/urls.py`
+Arquivo: `meusite/urls.py`
 ```python
 from django.contrib import admin
 from django.urls import path, include
@@ -65,7 +64,7 @@ urlpatterns = [
 ]
 ```
 ### Mudando a raiz do site de 127.0.0.1:8000 para 127.0.0.1:8000/catalog/
-Arquivo: `meuprj/urls.py`
+Arquivo: `meusite/urls.py`
 ```python
 from django.contrib import admin
 from django.urls import path, include
@@ -78,7 +77,7 @@ urlpatterns = [
 ]
 ```
 ### Habilitando arquivo estáticos (opcional)
-Arquivo: `meuprj/urls.py`
+Arquivo: `meusite/urls.py`
 ```python
 from django.contrib import admin
 from django.urls import path, include
@@ -96,8 +95,8 @@ urlpatterns = [
 
 # urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 ```
-### Criar o arquivo `urls.py` no diretório `meuprj/catalog`
-Arquivo: `meuprj/catalog/urls.py`
+### Criar o arquivo `urls.py` no diretório `catalog`
+Arquivo: `catalog/urls.py`
 ```python
 from django.urls import path
 from catalog import views
@@ -113,6 +112,84 @@ urlpatterns = [
 $ python3 manage.py makemigrations
 $ python3 manage.py migrate
 ```
+### Testando o website
+```shell
+$ python3 manage.py runserver
+```
+Apesar da mensagem de erro, **está funcionando!**.
+
+## Modelagem dos Dados
+### Definindo as tabelas
+Arquivo: `catalog/models.py`
+```python
+from django.db import models
+from django.urls import reverse     # Used to generate URLs by reversing the URL patterns
+import uuid # Required for unique book instances
+
+## Create your models here.
+class Genre(models.Model):
+    """Model representing a book genre."""
+    name = models.CharField(max_length=200, help_text='Enter a book genre (e.g. Science Fiction)')
+
+    def __str__(self):
+        """String for representing the Model object."""
+        return self.name
+
+class Book(models.Model):
+    """Model representing a book (but not a specific copy of a book)."""
+    title = models.CharField(max_length=200)
+
+    # Foreign Key used because book can only have one author, but authors can have multiple books
+    # Author as a string rather than object because it hasn't been declared yet in the file
+    author = models.ForeignKey('Author', on_delete=models.SET_NULL, null=True)
+
+    summary = models.TextField(max_length=1000, help_text='Enter a brief description of the book')
+    isbn = models.CharField('ISBN', max_length=13, help_text='13 Character <a href="https://www.isbn-international.org/content/what-isbn">ISBN number</a>')
+
+    # ManyToManyField used because genre can contain many books. Books can cover many genres.
+    # Genre class has already been defined so we can specify the object above.
+    genre = models.ManyToManyField(Genre, help_text='Select a genre for this book')
+
+    def __str__(self):
+        """String for representing the Model object."""
+        return self.title
+
+    def get_absolute_url(self):
+        """Returns the url to access a detail record for this book."""
+        return reverse('book-detail', args=[str(self.id)])
+
+class BookInstance(models.Model):
+    """Model representing a specific copy of a book (i.e. that can be borrowed from the library)."""
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text='Unique ID for this particular book across whole library')
+    book = models.ForeignKey('Book', on_delete=models.SET_NULL, null=True)
+    imprint = models.CharField(max_length=200)
+    due_back = models.DateField(null=True, blank=True)
+
+    LOAN_STATUS = (
+        ('m', 'Maintenance'),
+        ('o', 'On loan'),
+        ('a', 'Available'),
+        ('r', 'Reserved'),
+    )
+
+    status = models.CharField(
+        max_length=1,
+        choices=LOAN_STATUS,
+        blank=True,
+        default='m',
+        help_text='Book availability',
+    )
+
+    class Meta:
+        ordering = ['due_back']
+
+    def __str__(self):
+        """String for representing the Model object."""
+        return f'{self.id} ({self.book.title})'
+
+```
+
+
 
 
 
