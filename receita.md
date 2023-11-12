@@ -348,7 +348,14 @@ $ touch base_generic.html
 ### Arquivo de estilos (css)
 Como o `base_generic.html` faz alusão a `style.css`, devemos criá-lo dentro do diretório `catalog/static/css` que, por sua vez deve ser ciado antes. Uma vez criados, colemos as linhas:
 
-Arquivo: `catalog/static/css/style.css`
+**Diretório:** `catalog/`
+```shell
+$ mkdir static
+$ mkdir static/css
+$ cd static/css
+$ touch style.css
+```
+**Arquivo:** `catalog/static/css/style.css`
 ```css
 .sidebar-nav {
     margin-top: 20px;
