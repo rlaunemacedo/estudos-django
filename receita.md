@@ -102,14 +102,15 @@ urlpatterns = [
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 ```
 ### Criar o arquivo `urls.py` no diretório `catalog`
-Diretório: `catalog/`
-```bash
-touch urls.py
+A partir do terminal de comandos, no diretório `catalog/`, usaremos `touch` para criar o arquivo urls.py, como segue:
+
+**Diretório:** `catalog/`
+```shell
+$ touch urls.py
 ```
+O arquivo deverá ter o seguinte conteúdo por enquanto, mais tarde o atualizaremos:
 
-
-
-Arquivo: `catalog/urls.py`
+**Arquivo:** `catalog/urls.py`
 ```python
 from django.urls import path
 from catalog import views
@@ -133,7 +134,7 @@ Apesar da mensagem de erro, **está funcionando!**.
 
 ## Modelagem dos Dados
 ### Definindo as tabelas
-Arquivo: `catalog/models.py`
+**Arquivo:** `catalog/models.py`
 ```python
 from django.db import models
 from django.urls import reverse     # Used to generate URLs by reversing the URL patterns
@@ -224,7 +225,7 @@ $ python3 manage.py makemigrations
 $ python3 manage.py migrate
 ```
 ## Registrando os Modelos
-Arquivo: `catalog/admin.py`
+**Arquivo:** `catalog/admin.py`
 ```python
 from django.contrib import admin
 from catalog.models import Author, Genre, Book, BookInstance
@@ -250,13 +251,17 @@ Para fazer login no site, abra o `URL` `/admin` (e.i. http://127.0.0.1:8000/admi
 
 ## Mapeando URLs
 ### O mapa de urls
+O objetivo é ter os seguintes links:
+
     catalog/ — A página inicial (index).
     catalog/books/ — Uma lista de todos os livros.
     catalog/authors/ — Uma lista de todos os autores.
     catalog/book/<id> — A exibição de detalhes de um livro específico, com uma chave primária de campo <id> (o padrão). Por exemplo, o URL do terceiro livro adicionado à lista será /catalog/book/3.
     catalog/author/<id> — A exibição de detalhes para o autor específico com um campo de chave primária de <id>. Por exemplo, o URL do 11º autor adicionado à lista será /catalog/author/11.
 ### A página index
-Arquivo: `catalog/urls.py`
+Como dissemos anteriormente, vamos atualizar o arquivo `catalog/urls.py`.
+
+**Arquivo:** `catalog/urls.py`
 ```python
 from django.urls import path
 from catalog import views
@@ -266,7 +271,7 @@ urlpatterns = [
 ]
 ```
 ### View baseada em função
-Arquivo: `catalog/views.py`
+**Arquivo:** `catalog/views.py`
 ```python
 from django.shortcuts import render
 from catalog.models import Book, Author, BookInstance, Genre
@@ -298,7 +303,14 @@ def index(request):
 ### Templates
 Criar o diretório `catalog/templates` e dentro dele o arquivo `base_generic.html`. e cole as linhas:
 
-Arquivo: `catalog/templates/base_generic.html`
+**Diretório:** `catalog/`
+```shell
+$ mkdir templates
+$ cd templates
+$ touch base_generic.html
+```
+
+**Arquivo:** `catalog/templates/base_generic.html`
 ```html
 <!doctype html>
 <html lang="en">
