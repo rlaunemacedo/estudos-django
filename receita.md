@@ -102,6 +102,13 @@ urlpatterns = [
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 ```
 ### Criar o arquivo `urls.py` no diretório `catalog`
+Diretório: `catalog/`
+```bash
+touch urls.py
+```
+
+
+
 Arquivo: `catalog/urls.py`
 ```python
 from django.urls import path
@@ -326,8 +333,17 @@ Arquivo: `catalog/templates/base_generic.html`
   </body>
 </html>
 ```
+### Arquivo de estilos (css)
+Como o `base_generic.html` faz alusão a `style.css`, devemos criá-lo dentro do diretório `catalog/static/css` que, por sua vez deve ser ciado antes. Uma vez criados, colemos as linhas:
 
-
+Arquivo: `catalog/static/css/style.css`
+```css
+.sidebar-nav {
+    margin-top: 20px;
+    padding: 0;
+    list-style: none;
+  }
+```
 
 
 
