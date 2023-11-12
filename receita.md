@@ -289,7 +289,7 @@ TEMPLATES = [
     },
 ]
 ```
-### O arquivo html base
+### Criando um arquivo html base
 Chamaremos de `base_generic.html` o script htlm carregado por todas as páginas.
 
 **Diretório:** `catalog/templates`
@@ -334,7 +334,7 @@ Que terá o seguinte conteúdo:
 </html>
 ```
 
-### Arquivo de estilos (css)
+#### Criando um arquivo de estilos (css)
 Como o `base_generic.html` faz alusão a `style.css`, devemos criá-lo dentro do diretório `catalog/static/css` que, por sua vez deve ser ciado antes. Uma vez criados, colemos as linhas:
 
 **Diretório:** `catalog/`
@@ -352,7 +352,8 @@ $ touch style.css
     list-style: none;
   }
 ```
-### O template `index.html`
+## A Página de Início
+### Criando o template `index.html`
 **Diretório:** `catalog/templates/`
 ```shell
 $ touch index.html
@@ -420,7 +421,7 @@ urlpatterns = [
     path('', views.index, name='index'),
 ]
 ```
-### Vamos ver como está?
+**Vamos ver como está?**
 ```shell
 $ python3 manage.py runserver
 ```
@@ -428,7 +429,7 @@ E abra http://127.0.0.1:8000/ no seu navegador.
 
 > Nota: Os links All books e All authors **ainda não funcionarão** porque os caminhos, visualizações e modelos para essas páginas não estão definidos. Acabamos de inserir espaços reservados para esses links no template base_generic.html.
 
-## Book List Page
+## A Página Book List
 
 ### Criando o template ´book_list.html´
 
@@ -493,24 +494,8 @@ Abra o template base (/locallibrary/catalog/templates/base_generic.html) e insir
 <li><a href="{% url 'books' %}">Todos os livros</a></li>
 <li><a href="">Todos os autores</a></l
 ```
-### URL mapping
-Adicionando o item `path('books/', views.BookListView.as_view(), name='books'),` à lista `urlpatterns`, teremos:
-
-**Arquivo:** `catalog/urls.py`
-```python
-from django.urls import path
-from catalog import views
-
-urlpatterns = [
-    path('', views.index, name='index'),
-    path('books/', views.BookListView.as_view(), name='books'),
-]
+**Vamos ver como está?**
+```shell
+$ python3 manage.py runserver
 ```
-
-
-
-
-
-
-
-
+E abra http://127.0.0.1:8000/ no seu navegador.
