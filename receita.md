@@ -391,6 +391,9 @@ $ touch index.html
 ### Configurando a chave TEMPLATES em `settings.py`
 **Arquivo:** `settings.py`
 ```python
+## Não esquecer de importar os
+import os
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
