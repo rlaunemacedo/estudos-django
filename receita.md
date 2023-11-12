@@ -19,7 +19,7 @@ $ cd meuprj
 ## Criando um aplicativo de catálogo
 ```shell
 $ python3 manage.py startapp catalog
-$ cd meuprj
+$ cd catalog
 ```
 ## Registrando o app
 Arquivo: `meuprj/settings.py`
@@ -32,4 +32,36 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'catalog.apps.CatalogConfig',
-]```
+]
+```
+## Especificando o banco de dados
+Arquivo: `meuprj/settings.py`
+```python
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
+```
+## Outras configurações
+Arquivo: `meuprj/settings.py`
+```python
+LANGUAGE_CODE = 'pt-br'
+
+TIME_ZONE = 'America/Fortaleza'
+```
+## Conectando os mapeadores de URL
+Arquivo: `meuprj/urls.py`
+```python
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('catalog/', include('catalog.urls')),
+]
+```
+
+
+
