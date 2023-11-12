@@ -250,7 +250,6 @@ $ python3 manage.py runserver
 Para fazer login no site, abra o `URL` `/admin` (e.i. http://127.0.0.1:8000/admin)
 
 ## Mapeando URLs
-### O mapa de urls
 O objetivo é ter os seguintes links:
 
     catalog/ — A página inicial (index).
@@ -258,57 +257,22 @@ O objetivo é ter os seguintes links:
     catalog/authors/ — Uma lista de todos os autores.
     catalog/book/<id> — A exibição de detalhes de um livro específico, com uma chave primária de campo <id> (o padrão). Por exemplo, o URL do terceiro livro adicionado à lista será /catalog/book/3.
     catalog/author/<id> — A exibição de detalhes para o autor específico com um campo de chave primária de <id>. Por exemplo, o URL do 11º autor adicionado à lista será /catalog/author/11.
-### A página index
-Como dissemos anteriormente, vamos atualizar o arquivo `catalog/urls.py`.
 
-**Arquivo:** `catalog/urls.py`
-```python
-from django.urls import path
-from catalog import views
-
-urlpatterns = [
-    path('', views.index, name='index'),
-]
-```
-### View baseada em função
-**Arquivo:** `catalog/views.py`
-```python
-from django.shortcuts import render
-from catalog.models import Book, Author, BookInstance, Genre
-
-# Create your views here.
-def index(request):
-    """View function for home page of site."""
-
-    # Generate counts of some of the main objects
-    num_books = Book.objects.all().count()
-    num_instances = BookInstance.objects.all().count()
-
-    # Available books (status = 'a')
-    num_instances_available = BookInstance.objects.filter(status__exact='a').count()
-
-    # The 'all()' is implied by default.
-    num_authors = Author.objects.count()
-
-    context = {
-        'num_books': num_books,
-        'num_instances': num_instances,
-        'num_instances_available': num_instances_available,
-        'num_authors': num_authors,
-    }
-
-    # Render the HTML template index.html with the data in the context variable
-    return render(request, 'index.html', context=context)
-```
-### Templates
+### Criando o ambiente das templates
 Criar o diretório `catalog/templates` e dentro dele o arquivo `base_generic.html`. e cole as linhas:
 
 **Diretório:** `catalog/`
 ```shell
 $ mkdir templates
-$ cd templates
+```
+### O arquivo html base
+Chamaremos de `base_generic.html` o script htlm carregado por todas as páginas.
+
+**Diretório:** `catalog/templates`
+```shell
 $ touch base_generic.html
 ```
+Que terá o seguinte conteúdo:
 
 **Arquivo:** `catalog/templates/base_generic.html`
 ```html
@@ -345,6 +309,7 @@ $ touch base_generic.html
   </body>
 </html>
 ```
+
 ### Arquivo de estilos (css)
 Como o `base_generic.html` faz alusão a `style.css`, devemos criá-lo dentro do diretório `catalog/static/css` que, por sua vez deve ser ciado antes. Uma vez criados, colemos as linhas:
 
@@ -387,6 +352,50 @@ $ touch index.html
     <li><strong>Authors:</strong> {{ num_authors }}</li>
   </ul>
 {% endblock %}
+```
+### A função `views.index` que carrega o `index.html`
+**Arquivo:** `catalog/views.py`
+```python
+from django.shortcuts import render
+from catalog.models import Book, Author, BookInstance, Genre
+
+# Create your views here.
+def index(request):
+    """View function for home page of site."""
+
+    # Generate counts of some of the main objects
+    num_books = Book.objects.all().count()
+    num_instances = BookInstance.objects.all().count()
+
+    # Available books (status = 'a')
+    num_instances_available = BookInstance.objects.filter(status__exact='a').count()
+
+    # The 'all()' is implied by default.
+    num_authors = Author.objects.count()
+
+    context = {
+        'num_books': num_books,
+        'num_instances': num_instances,
+        'num_instances_available': num_instances_available,
+        'num_authors': num_authors,
+    }
+
+    # Render the HTML template index.html with the data in the context variable
+    return render(request, 'index.html', context=context)
+```
+
+### Roteando `views.index`
+
+Como dissemos anteriormente, vamos atualizar o arquivo `catalog/urls.py`.
+
+**Arquivo:** `catalog/urls.py`
+```python
+from django.urls import path
+from catalog import views
+
+urlpatterns = [
+    path('', views.index, name='index'),
+]
 ```
 ### Configurando a chave TEMPLATES em `settings.py`
 **Arquivo:** `settings.py`
