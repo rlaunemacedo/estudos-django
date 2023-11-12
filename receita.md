@@ -1,5 +1,5 @@
 # MINHA RECEITA DJANGO
-Para a construção deste trabalho, usei como base a excelente fonte [**mdn web docs**](https://developer.mozilla.org/pt-BR/docs/Learn/Server-side/Django). Espero sinceramente que seja útil aos iniciantes, como eu, estudiosos do framework **Django**.
+Para a construção desta ingênua **receita**, usei como base a excelente fonte [**mdn web docs**](https://developer.mozilla.org/pt-BR/docs/Learn/Server-side/Django). Espero sinceramente que este trabalho seja útil aos iniciantes, como eu, ao estudo do framework **Django**.
 ## Criando/Ativando Ambiente Virtual
 ```shell
 $ mkdir e_jango
