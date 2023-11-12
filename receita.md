@@ -328,7 +328,7 @@ $ touch style.css
     list-style: none;
   }
 ```
-### O template ´index.html´
+### O template `index.html`
 **Diretório:** `catalog/templates/`
 ```shell
 $ touch index.html
