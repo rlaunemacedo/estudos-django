@@ -96,4 +96,23 @@ urlpatterns = [
 
 # urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 ```
+### Criar o arquivo `urls.py` no diretório `meuprj/catalog`
+Arquivo: `meuprj/catalog/urls.py`
+```python
+from django.urls import path
+from catalog import views
+
+urlpatterns = [
+
+]
+
+```
+## Testando o Framework do Site
+### Migrando o banco de dados
+```shell
+$ python3 manage.py makemigrations
+$ python3 manage.py migrate
+```
+
+
 
