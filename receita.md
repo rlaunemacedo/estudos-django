@@ -1,4 +1,5 @@
 # MINHA RECEITA DJANGO
+Para a construção deste trabalho, usei como base a excelente fonte [**mdn web docs**](https://developer.mozilla.org/pt-BR/docs/Learn/Server-side/Django). Espero sinceramente que seja útil aos iniciantes, como eu, estudiosos do framework **Django**.
 ## Criando/Ativando Ambiente Virtual
 ```shell
 $ mkdir e_jango
@@ -231,6 +232,10 @@ $ python3 manage.py createsuperuser
 ```shell
 $ python3 manage.py runserver
 ```
+### Fazer login
+Para fazer login no site, abra o `URL` `/admin` (e.i. http://127.0.0.1:8000/admin)
+
+
 
 
 
