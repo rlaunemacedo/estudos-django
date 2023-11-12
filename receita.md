@@ -435,11 +435,13 @@ E abra http://127.0.0.1:8000/ no seu navegador.
 
 **Diretório:** `catalog/templates/`
 ```shell
+$ mkdir catalog
+$ cd catalog
 $ touch book_list.html
 ```
 Contendo:
 
-**Arquivo:** `catalog/templates/book_list.html`
+**Arquivo:** `catalog/templates/catalog/book_list.html`
 ```html
 {% extends "base_generic.html" %}
 
@@ -460,13 +462,18 @@ Contendo:
 
 ```
 
-### Adicionando a função `views.BookListView` que carrega `book_list.html`
+### Adicionando as função `views.BookListView`, que carrega `book_list.html`, e `views.BookDetailView` 
 
 **Arquivo:** `catalog/views.py`
 ```python
-from django.views import generic        ## adicionar no início
+## adicionar no início
+from django.views import generic
 
-class BookListView(generic.ListView):   ## adicionar ao final
+## adicionar ao final
+class BookListView(generic.ListView):   
+    model = Book
+
+class BookDetailView(generic.DetailView):    
     model = Book
 ```
 ### Roteando `views.BookListView`
