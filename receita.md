@@ -89,6 +89,8 @@ Arquivo: `meusite/urls.py`
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import RedirectView
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -97,10 +99,7 @@ urlpatterns = [
 ]
 
 ## Use static() to add url mapping to serve static files during development (only)
-# from django.conf import settings
-# from django.conf.urls.static import static
-
-# urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 ```
 ### Criar o arquivo `urls.py` no diretório `catalog`
 Arquivo: `catalog/urls.py`
@@ -291,6 +290,7 @@ def index(request):
 ```
 ### Templates
 Criar o diretório `catalog/templates` e dentro dele o arquivo `base_generic.html`. e cole as linhas:
+
 Arquivo: `catalog/templates/base_generic.html`
 ```html
 <!doctype html>
