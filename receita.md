@@ -210,7 +210,27 @@ class Author(models.Model):
 $ python3 manage.py makemigrations
 $ python3 manage.py migrate
 ```
+## Registrando os Modelos
+Arquivo: `catalog/admin.py`
+```python
+from django.contrib import admin
+from catalog.models import Author, Genre, Book, BookInstance
 
+## Register your models here.
+admin.site.register(Book)
+admin.site.register(Author)
+admin.site.register(Genre)
+admin.site.register(BookInstance)
+```
+## Administração do Website
+### Criando um super usuário
+```shell
+$ python3 manage.py createsuperuser
+```
+### Vamos testar
+```shell
+$ python3 manage.py runserver
+```
 
 
 
