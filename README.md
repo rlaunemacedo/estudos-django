@@ -251,8 +251,10 @@ Running migrations:
 ```
 ### Atualizações nos modelos
 Após fazermos alterações na modelagem (arquivo: **`polls/models.py`**), basicamente rodaremos três dos últimos comandos vistos anteriormente, nomeadamente:
-1. **`python manage.py makemigrations polls`**
-2. **`python manage.py sqlmigrate polls ####*`**
-3. **`python manage.py migrate`**
+```shell
+$ python manage.py makemigrations polls
+$ python manage.py sqlmigrate polls ####*
+$ python manage.py migrate
+```
+(*) Observe que #### deve ser trocado pelo número exibido na saída do primeiro comando.
 
-(*) #### deve ser trocado pelo número exibido no primeiro comando
