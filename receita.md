@@ -1,5 +1,5 @@
-# Receita Django
-## Criando/Ativando ambiente virtual
+# MINHA RECEITA DJANGO
+## Criando/Ativando Ambiente Virtual
 ```shell
 $ mkdir e_jango
 $ cd e_jango
@@ -11,17 +11,18 @@ $ source .e_jango/bin/activate
 $ pip install django
 $ django-admin --version
 ```
-## Criando um projeto
+## Criando um Projeto
 ```shell
 $ django-admin startproject meuprj
 $ cd meuprj
 ```
-## Criando um aplicativo de catálogo
+## Criando um Aplicativo
 ```shell
 $ python3 manage.py startapp catalog
 $ cd catalog
 ```
-## Registrando o app
+## Configurações
+### Registrando o app
 Arquivo: `meuprj/settings.py`
 ```python
 INSTALLED_APPS = [
@@ -34,7 +35,7 @@ INSTALLED_APPS = [
     'catalog.apps.CatalogConfig',
 ]
 ```
-## Especificando o banco de dados
+### Especificando o banco de dados
 Arquivo: `meuprj/settings.py`
 ```python
 DATABASES = {
@@ -44,14 +45,15 @@ DATABASES = {
     }
 }
 ```
-## Outras configurações
+### Outras configurações
 Arquivo: `meuprj/settings.py`
 ```python
 LANGUAGE_CODE = 'pt-br'
 
 TIME_ZONE = 'America/Fortaleza'
 ```
-## Conectando os mapeadores de URL
+## Definindo as Rotas
+### Conectando os mapeadores de URL
 Arquivo: `meuprj/urls.py`
 ```python
 from django.contrib import admin
@@ -62,6 +64,36 @@ urlpatterns = [
     path('catalog/', include('catalog.urls')),
 ]
 ```
+### Mudando a raiz do site de 127.0.0.1:8000 para 127.0.0.1:8000/catalog/
+Arquivo: `meuprj/urls.py`
+```python
+from django.contrib import admin
+from django.urls import path, include
+from django.views.generic import RedirectView
 
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('catalog/', include('catalog.urls')),
+    path('', RedirectView.as_view(url='/catalog/')),
+]
+```
+### Habilitando arquivo estáticos (opcional)
+Arquivo: `meuprj/urls.py`
+```python
+from django.contrib import admin
+from django.urls import path, include
+from django.views.generic import RedirectView
 
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('catalog/', include('catalog.urls')),
+    path('', RedirectView.as_view(url='/catalog/')),
+]
+
+## Use static() to add url mapping to serve static files during development (only)
+# from django.conf import settings
+# from django.conf.urls.static import static
+
+# urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+```
 
