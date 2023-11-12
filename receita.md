@@ -328,7 +328,7 @@ $ touch style.css
     list-style: none;
   }
 ```
-### O arquivo index.html
+### O template ´index.html´
 **Diretório:** `catalog/templates/`
 ```shell
 $ touch index.html
@@ -353,7 +353,7 @@ $ touch index.html
   </ul>
 {% endblock %}
 ```
-### A função `views.index` que carrega o `index.html`
+### Adicionando a função `views.index` que carrega o `index.html`
 **Arquivo:** `catalog/views.py`
 ```python
 from django.shortcuts import render
@@ -385,7 +385,6 @@ def index(request):
 ```
 
 ### Roteando `views.index`
-
 Como dissemos anteriormente, vamos atualizar o arquivo `catalog/urls.py`.
 
 **Arquivo:** `catalog/urls.py`
@@ -430,6 +429,81 @@ E abra http://127.0.0.1:8000/ no seu navegador.
 > Nota: Os links All books e All authors **ainda não funcionarão** porque os caminhos, visualizações e modelos para essas páginas não estão definidos. Acabamos de inserir espaços reservados para esses links no template base_generic.html.
 
 ## Book List Page
+
+### Criando o template ´book_list.html´
+
+**Diretório:** `catalog/templates/`
+```shell
+$ touch book_list.html
+```
+Contendo:
+
+**Arquivo:** `catalog/templates/book_list.html`
+```html
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Book List</h1>
+  {% if book_list %}
+  <ul>
+    {% for book in book_list %}
+      <li>
+        <a href="{{ book.get_absolute_url }}">{{ book.title }}</a> ({{book.author}})
+      </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>There are no books in the library.</p>
+  {% endif %}
+{% endblock %}
+
+```
+
+### Adicionando a função `views.BookListView` que carrega `book_list.html`
+
+**Arquivo:** `catalog/views.py`
+```python
+from django.views import generic        ## adicionar no início
+
+class BookListView(generic.ListView):   ## adicionar ao final
+    model = Book
+```
+### Roteando `views.BookListView`
+
+Adicionando o item `path('books/', views.BookListView.as_view(), name='books'),` à lista `urlpatterns`, teremos:
+
+**Arquivo:** `catalog/urls.py`
+```python
+from django.urls import path
+from catalog import views
+
+urlpatterns = [
+    path('', views.index, name='index'),
+    path('books/', views.BookListView.as_view(), name='books'),
+]
+```
+
+**Atualizando o link `Todos os livros` no template base**
+
+Abra o template base (/locallibrary/catalog/templates/base_generic.html) e insira {% url 'books' %} no link da URL para All books,como mostrado abaixo. Isso habilitará o link em todas as páginas (podemos colocá-lo em prática agora que criamos o mapeador de URL "books").
+
+**Arquivo:** `templates/base_generic.html`
+```html
+<li><a href="{% url 'index' %}">Início</a></li>
+<li><a href="{% url 'books' %}">Todos os livros</a></li>
+<li><a href="">Todos os autores</a></l
+```
+
+
+
+
+
+
+
+
+
+
+
 ### URL mapping
 Adicionando o item `path('books/', views.BookListView.as_view(), name='books'),` à lista `urlpatterns`, teremos:
 
