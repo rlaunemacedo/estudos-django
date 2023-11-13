@@ -462,7 +462,7 @@ Contendo:
 
 ```
 
-### Adicionando as função `views.BookListView`, que carrega `book_list.html`, e `views.BookDetailView` 
+### Adicionando as função `views.BookListView`, que carrega `book_list.html`
 
 **Arquivo:** `catalog/views.py`
 ```python
@@ -471,9 +471,6 @@ from django.views import generic
 
 ## adicionar ao final
 class BookListView(generic.ListView):   
-    model = Book
-
-class BookDetailView(generic.DetailView):    
     model = Book
 ```
 ### Roteando `views.BookListView`
