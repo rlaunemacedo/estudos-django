@@ -501,6 +501,73 @@ Abra o template base (/locallibrary/catalog/templates/base_generic.html) e insir
 <li><a href="{% url 'books' %}">Todos os livros</a></li>
 <li><a href="">Todos os autores</a></l
 ```
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+### Criando o template ´book_detail.html´
+
+**Diretório:** `catalog/templates/catalog/`
+```shell
+$ touch book_detail.html
+```
+Contendo:
+
+**Arquivo:** `catalog/templates/catalog/book_detail.html`
+```html
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Title: {{ book.title }}</h1>
+
+  <p><strong>Author:</strong> <a href="">{{ book.author }}</a></p> <!-- author detail link not yet defined -->
+  <p><strong>Summary:</strong> {{ book.summary }}</p>
+  <p><strong>ISBN:</strong> {{ book.isbn }}</p>
+  <p><strong>Language:</strong> {{ book.language }}</p>
+  <p><strong>Genre:</strong> {% for genre in book.genre.all %} {{ genre }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+
+  <div style="margin-left:20px;margin-top:20px">
+    <h4>Copies</h4>
+
+    {% for copy in book.bookinstance_set.all %}
+      <hr>
+      <p class="{% if copy.status == 'a' %}text-success{% elif copy.status == 'm' %}text-danger{% else %}text-warning{% endif %}">{{ copy.get_status_display }}</p>
+      {% if copy.status != 'a' %}
+        <p><strong>Due to be returned:</strong> {{copy.due_back}}</p>
+      {% endif %}
+      <p><strong>Imprint:</strong> {{copy.imprint}}</p>
+      <p class="text-muted"><strong>Id:</strong> {{copy.id}}</p>
+    {% endfor %}
+  </div>
+{% endblock %}
+```
+
+### Adicionando as função `views.BookDetailView` que carrega `book_detail.html` 
+
+**Arquivo:** `catalog/views.py`
+```python
+## adicionar no início
+from django.views import generic
+
+## adicionar ao final
+class BookListView(generic.ListView):   
+    model = Book
+
+class BookDetailView(generic.DetailView):    
+    model = Book
+```
+### Roteando `views.BookDetailView`
+
+Adicionando o item `path('book/<int:pk>', views.BookDetailView.as_view(), name='book-detail'),` à lista `urlpatterns`, teremos:
+
+**Arquivo:** `catalog/urls.py`
+```python
+from django.urls import path
+from catalog import views
+
+urlpatterns = [
+    path('', views.index, name='index'),
+    path('books/', views.BookListView.as_view(), name='books'),
+    path('book/<int:pk>', views.BookDetailView.as_view(), name='book-detail'),
+]
+```
 **Vamos ver como está?**
 ```shell
 $ python3 manage.py runserver
