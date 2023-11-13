@@ -322,8 +322,8 @@ Que terá o seguinte conteúdo:
           {% block sidebar %}
             <ul class="sidebar-nav">
               <li><a href="{% url 'index' %}">Home</a></li>
-              <li><a href="">All books</a></li>
-              <li><a href="">All authors</a></li>
+              <li><a href="">Todos os livros</a></li>
+              <li><a href="">Todos os autores</a></li>
             </ul>
           {% endblock %}
         </div>
@@ -427,11 +427,11 @@ $ python3 manage.py runserver
 ```
 E abra http://127.0.0.1:8000/ no seu navegador.
 
-> Nota: Os links All books e All authors **ainda não funcionarão** porque os caminhos, visualizações e modelos para essas páginas não estão definidos. Acabamos de inserir espaços reservados para esses links no template base_generic.html.
+> Nota: Os links *Todos os livros* e *Todos os autores* **ainda não funcionarão** porque os caminhos, visualizações e modelos para essas páginas não estão definidos. Acabamos de inserir espaços reservados para esses links no template base_generic.html.
 
-## A Página Book List
+## A Página que Lista *Todos os Livros*
 
-### Criando o template ´book_list.html´
+### Criando o template `book_list.html`
 
 **Diretório:** `catalog/templates/`
 ```shell
@@ -462,7 +462,7 @@ Contendo:
 
 ```
 
-### Adicionando as função `views.BookListView`, que carrega `book_list.html`
+### Adicionando a função `views.BookListView` que carrega `book_list.html`
 
 **Arquivo:** `catalog/views.py`
 ```python
@@ -473,7 +473,7 @@ from django.views import generic
 class BookListView(generic.ListView):   
     model = Book
 ```
-### Roteando `views.BookListView`
+### Roteando a função `views.BookListView`
 
 Adicionando o item `path('books/', views.BookListView.as_view(), name='books'),` à lista `urlpatterns`, teremos:
 
@@ -535,7 +535,7 @@ Contendo:
 {% endblock %}
 ```
 
-### Adicionando as função `views.BookDetailView` que carrega `book_detail.html` 
+### Adicionando a função `views.BookDetailView` que carrega `book_detail.html` 
 
 **Arquivo:** `catalog/views.py`
 ```python
@@ -549,7 +549,7 @@ class BookListView(generic.ListView):
 class BookDetailView(generic.DetailView):    
     model = Book
 ```
-### Roteando `views.BookDetailView`
+### Roteando a função `views.BookDetailView`
 
 Adicionando o item `path('book/<int:pk>', views.BookDetailView.as_view(), name='book-detail'),` à lista `urlpatterns`, teremos:
 
