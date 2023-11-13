@@ -498,7 +498,6 @@ Abra o template base (/locallibrary/catalog/templates/base_generic.html) e insir
 <li><a href="{% url 'books' %}">Todos os livros</a></li>
 <li><a href="">Todos os autores</a></l
 ```
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 ### Criando o template ´book_detail.html´
 
 **Diretório:** `catalog/templates/catalog/`
