@@ -19,9 +19,12 @@ $ pip install django
 $ django-admin --version
 ```
 ## Criando um Projeto
+
+Nomeei o projeto de `setup` por conveniencia e coloquei um `.` para que não seja criado um diretório com o mesmo nome setup dentro de setup (`setup/setup`).
+
 ```shell
-$ django-admin startproject meusite
-$ cd meusite
+$ django-admin startproject setup .
+$ cd setup
 ```
 ## Criando um Aplicativo
 ```shell
@@ -105,6 +108,7 @@ urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 A partir do terminal de comandos, no diretório `catalog/`, usaremos `touch` para criar o arquivo urls.py, como segue:
 
 **Diretório:** `catalog/`
+
 ```shell
 $ touch urls.py
 ```
@@ -226,6 +230,7 @@ $ python3 manage.py migrate
 ```
 ## Registrando os Modelos
 **Arquivo:** `catalog/admin.py`
+
 ```python
 from django.contrib import admin
 from catalog.models import Author, Genre, Book, BookInstance
@@ -267,6 +272,7 @@ $ mkdir templates
 ```
 #### Configurando a chave TEMPLATES em `settings.py`
 **Arquivo:** `settings.py`
+
 ```python
 ## Não esquecer de importar os
 import os
