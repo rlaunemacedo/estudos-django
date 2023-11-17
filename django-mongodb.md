@@ -157,7 +157,7 @@ Rode o comando:
 $ python manage.py runserver
 ````
 
-A saída de ser parecida com:
+A saída deve ser parecida com:
 
 ````
 {'_id': ObjectId('654ce63b1ab6ff3e59a8871d'), 'nome': 'Yan', 'fone': ['1234-5678', '2234-5678', '2235-5678']}
