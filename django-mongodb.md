@@ -1,6 +1,8 @@
-## Django e MongoDB
+## Django, MongoDB e PyMongo
 
 **Por R N Launé Macêdo**
+
+#djangomongodb #mongodbpymongo
 
 ### Apresentação
 
