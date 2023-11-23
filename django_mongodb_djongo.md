@@ -46,4 +46,10 @@ class Students(models.Model):
 Validadores 
 Podemos aplicar verificações de validação como URLValidator, EmailValidator, RegexValidator etc. antes de cada campo ser salvo no banco de dados.
 
+```python
+class Websites(models.Model):
+    ownes = models.TextField()
+    websiteUrl = models.URLField(validators=[]URLValidator)
+        class
+```
 
