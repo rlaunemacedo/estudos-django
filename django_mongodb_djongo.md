@@ -31,17 +31,19 @@ Requisitos -
 
 Recursos :  
 
-    Reutilizar Modelos Django / ORM - 
-    Como os Modelos Django são compatíveis com Djongo, podemos reutilizá-los.
-    Verificações de integridade O 
-    Djongo permite verificações de integridade como valores ausentes antes de serem salvos no banco de dados.
-    Por exemplo: valores ausentes nunca são armazenados se definirmos null = False, blank = False em EmbeddedField
+Reutilizar Modelos Django / ORM - 
+Como os Modelos Django são compatíveis com Djongo, podemos reutilizá-los.
+Verificações de integridade O 
 
-'''python
+Djongo permite verificações de integridade como valores ausentes antes de serem salvos no banco de dados.
+Por exemplo: valores ausentes nunca são armazenados se definirmos null = False, blank = False em EmbeddedField
+
+```python
 class Students(models.Model):
+    masks = models.EmbeddedField(Null=False, Blank=False)
+```
 
-'''
-
-
+Validadores 
+Podemos aplicar verificações de validação como URLValidator, EmailValidator, RegexValidator etc. antes de cada campo ser salvo no banco de dados.
 
 
