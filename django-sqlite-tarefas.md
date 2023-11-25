@@ -1,4 +1,4 @@
-## Django com SqLite - Tarefas
+## Django com SqLite - Um Administrador de Tarefas
 
 Por R N Launé Macêdo
 
