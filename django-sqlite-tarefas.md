@@ -1122,7 +1122,7 @@ Arquivo: `templates/tarefas/exclui_tarefa.html`
 
 E assim, o nosso **CRUD** está concluído.
 
-Por questões de aprofundamento e quem sabe *por questões de gosto* para o processo de exclusão de registro, adotamos pela exibição de um *form modal* que é exibido ao clicarmos no botão de exclusão de uma tarefa para confirmar ou não a exclusão.
+Por questões de aprofundamento, e, quem sabe, *por questões de gosto* também, para o processo de exclusão de registro, adotamos pela exibição de um *form modal* que é exibido ao clicarmos no botão de exclusão de uma tarefa para confirmar ou não a exclusão.
 
 Geralmente, coloca-se um form modal na template básica e, sendo assim, poderá ser utilizado a qualquer momento no aplicativo. Porém, dada a especificidade do form, decidimos colocar, tanto o form modal quanto o *script-JS*, na template que lista as tarefas.
 
