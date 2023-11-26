@@ -935,7 +935,7 @@ Arquivo: `teplates/tarefas/edita_tarefa.html`
                 <div class='input-group date' id='datetimepicker3'>
                     <input type="text"  class="form-control" 
                            value="{{tarefa.dt_execucao|date:'d/m/Y'}}"
-                           name="dt_execucao" required="" id="id_dt_execucao"/>
+                           name="dt_execucao" id="id_dt_execucao"/>
                     <span class="input-group-addon">
                     <span class="glyphicon glyphicon-calendar"></span>
                     </span>
@@ -959,7 +959,7 @@ Arquivo: `teplates/tarefas/edita_tarefa.html`
                 <label>Hora execução:</label>
                 <div class='input-group date' id='datetimepicker4'>
                     <input type="text" class="form-control" value="{{tarefa.hr_execucao}}"
-                           name="hr_execucao" required="" id="id_hr_execucao"/>
+                           name="hr_execucao" id="id_hr_execucao"/>
                     <span class="input-group-addon">
                     <span class="glyphicon glyphicon-time"></span>
                     </span>
