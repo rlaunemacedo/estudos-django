@@ -382,8 +382,11 @@ Arquivo: `template/tarefas/lista_tarefas.html`
       <main class="container">
         <h3 class="dark">Lista de tarefas</h3>
         {% if not lista %}
-        <p>Não há tarefas cadastradas! 
-            <a href="#" class="btn btn-success btn-sm">Cadastrar uma tarefa</a> </p>
+	    <div class="container">
+	      <div class="row">
+	        <h4>Não há tarefa cadastrada!... </h4>
+	      </div>
+	    </div>
         {% else %}
 
         <table class="table">
@@ -604,8 +607,11 @@ Arquivo: `template/tarefas/lista_tarefas.html`
 {% block conteudo %}
 
         {% if not lista %}
-        <p>Não há tarefas cadastradas! 
-            <a href="#" class="btn btn-success btn-sm">Cadastrar uma tarefa</a> </p>
+	    <div class="container">
+	      <div class="row">
+	        <h4>Não há tarefa cadastrada!... </h4>
+	      </div>
+	    </div>
         {% else %}
 
         <table class="table">
@@ -1217,9 +1223,11 @@ Arquivo: `templates/tarefas/lista_tarefas.html`
 <!- FINAL DO FORM MODAL -->
 
     {% if not lista %}
-    <p>Não há tarefas cadastradas! 
-        <a href="#" class="btn btn-success btn-sm">Cadastrar uma tarefa</a> 
-    </p>
+	<div class="container">
+	   <div class="row">
+	      <h4>Não há tarefa cadastrada!... </h4>
+           </div>
+	</div>
     {% else %}
 
     <table class="table">
