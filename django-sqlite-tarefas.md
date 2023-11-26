@@ -642,8 +642,6 @@ Arquivo: `template/tarefas/lista_tarefas.html`
 {% endblock conteudo %}
 ````
 
-
-
 Observe as mudanças e tente entender sua função. A template que adiciona novas tarefas terá o seguinte conteúdo:
 
 Arquivo: `template/tarefas/nova_tarefa.html`
@@ -710,8 +708,6 @@ Arquivo: `templates/base.html`
   </body>
 </html>
 ````
-
-
 
 Arquivo: `templates/tarefas/nova_tarefa.html`
 
@@ -809,8 +805,6 @@ Arquivo: `templates/tarefas/nova_tarefa.html`
 
 ````
 
-
-
 Continuando, agora com nova *cara*, vamos fazer a rotina de atualização de uma tarefa.
 
 #### UpdateView
@@ -841,8 +835,6 @@ class edita_tarefa(UpdateView):
     success_url = reverse_lazy("lista_tarefas")
 ````
 
-
-
 Arquivo: `setup/urls.py`
 
 ````python
@@ -858,8 +850,6 @@ urlpatterns = [
     path('atualiza/<int:pk>', edita_tarefa.as_view(), name="edita_tarefa"),
 ]
 ````
-
-
 
 Arquivo: `teplates/tarefas/edita_tarefa.html`
 
@@ -1005,8 +995,6 @@ Arquivo: `teplates/tarefas/edita_tarefa.html`
 {% endblock conteudo %}
 ````
 
-
-
 Por último a exclusão de uma tarefa.
 
 #### DeleteView
@@ -1044,8 +1032,6 @@ class exclui_tarefa(DeleteView):
     success_url = reverse_lazy("lista_tarefas")
 
 ````
-
-
 
 O roteamento para a classe `edita_tarefa`:
 
@@ -1118,14 +1104,80 @@ Arquivo: `templates/tarefas/exclui_tarefa.html`
 {% endblock conteudo %}
 ````
 
-
-
 E assim, o nosso **CRUD** está concluído.
 
-Por questões de aprofundamento, e, quem sabe, *por questões de gosto* também, para o processo de exclusão de registro, adotamos pela exibição de um *form modal* que é exibido ao clicarmos no botão de exclusão de uma tarefa para confirmar ou não a exclusão.
+Por questões de aprofundamento, e, quem sabe, *por questões de gosto* também, para o processo de exclusão de registro, optamos pela exibição de um *panel modal* que é exibido ao clicarmos no botão de exclusão de uma tarefa para confirmar ou não a exclusão.
 
-Geralmente, coloca-se um form modal na template básica e, sendo assim, poderá ser utilizado a qualquer momento no aplicativo. Porém, dada a especificidade do form, decidimos colocar, tanto o form modal quanto o *script-JS*, na template que lista as tarefas.
+### Panel modal
 
+Geralmente, coloca-se um panel modal na template base quando se trata de algo de uso comum e, sendo assim, poderá ser utilizado a qualquer momento no aplicativo. Porém, dada a especificidade do panel, decidimos colocar, tanto o panel modal quanto o *script-JS*, na template que lista as tarefas, ficando apenas a seção de `style` na template base.
+
+Aquivo: `template/base.html`
+
+````html
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+        {% block page_titulo %}{% endblock page_titulo %}
+    </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" 
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" 
+          crossorigin="anonymous">
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript"
+            src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
+    <script src="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/src/js/bootstrap-datetimepicker.js"></script>
+
+<!-- INICIO STYLE MODAL -->
+    <style>
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.4);
+      }
+      .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+      }      
+    </style>
+<!-- INICIO STYLE MODAL -->
+
+  </head>
+  <body>
+    <!--nav class="navbar bg-body-tertiary"-->
+    <nav class="navbar bg-primary mb-4" data-bs-theme="dark">
+        <div class="container-fluid">
+          <a class="navbar-brand">
+            Administração de Tarefas
+          </a>
+        </div>
+      </nav>
+      <main class="container">
+        <h3 class="dark">
+            {% block page_acao %}{% endblock page_acao %}
+        </h3>
+
+        {% block conteudo %}{% endblock conteudo %}
+        
+      </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  </body>
+</html>
+````
 Arquivo: `templates/tarefas/lista_tarefas.html`
 
 ````html
