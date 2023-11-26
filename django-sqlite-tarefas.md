@@ -598,8 +598,8 @@ Arquivo: `template/tarefas/lista_tarefas.html`
 
 ````html
 {% extends "base.html" %}
-{% block page_titulo %}Lista de Tarefa{% endblock page_titulo %}
-{% block page_acao %}Lista de Tarefa{% endblock page_acao %}
+{% block page_titulo %}Lista de Tarefas{% endblock page_titulo %}
+{% block page_acao %}Lista de Tarefas{% endblock page_acao %}
 
 {% block conteudo %}
 
@@ -1182,8 +1182,8 @@ Arquivo: `templates/tarefas/lista_tarefas.html`
 
 ````html
 {% extends "base.html" %}
-{% block page_titulo %}Lista de Tarefa{% endblock page_titulo %}
-{% block page_acao %}Lista de Tarefa{% endblock page_acao %}
+{% block page_titulo %}Lista de Tarefas{% endblock page_titulo %}
+{% block page_acao %}Lista de Tarefas{% endblock page_acao %}
 
 {% block conteudo %}
 <!- INICIO DO FORM MODAL -->
